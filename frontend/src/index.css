@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-canvas-light text-ink font-sans text-body antialiased;
+  }
+
+  /* Visible keyboard focus everywhere — quality floor regardless of design system. */
+  :focus-visible {
+    outline: 2px solid theme("colors.link-blue");
+    outline-offset: 2px;
+  }
+}

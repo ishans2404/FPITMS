@@ -1,0 +1,35 @@
+/*
+ * DESIGN.md tokens as CSS custom properties, for the rare case a component
+ * (e.g. a recharts inline style or SVG fill) needs a raw value Tailwind
+ * utility classes can't reach. Tailwind classes (bg-ink, text-ash, etc.) are
+ * still the default way to use these tokens — reach for this file only when
+ * a library requires a literal value.
+ */
+:root {
+  --color-ink: #0b0b0b;
+  --color-on-primary: #ffffff;
+  --color-brand: #f36458;
+  --color-brand-deep: #dd0000;
+  --color-ink-soft: #212121;
+  --color-graphite: #353535;
+  --color-slate: #3c4758;
+  --color-slate-soft: #505b6c;
+  --color-mute: #797979;
+  --color-ash: #b9b9b9;
+  --color-hairline: #ededed;
+  --color-hairline-soft: #353535;
+  --color-canvas-light: #ffffff;
+  --color-canvas-paper: #ededed;
+  --color-link-blue: #0052ef;
+  --color-link-blue-soft: #55beff;
+  --color-surface-blue-bg: #afe3ff;
+  --color-success: #37cd84;
+  --color-error: #dd0000;
+
+  --spacing-xxs: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+}
