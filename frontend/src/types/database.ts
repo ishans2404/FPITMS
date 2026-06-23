@@ -1,4 +1,4 @@
-// Hand-written types matching supabase/migrations/000{1,2,3}_*.sql.
+// Hand-written types matching supabase/migrations/000{1,2,3,4}_*.sql.
 // Replace with `supabase gen types typescript` output once the project is
 // linked locally — these are kept in sync manually for now.
 //
@@ -12,11 +12,23 @@
 // as well. 2.45.4 does not have this problem. Revisit the pin once a fixed
 // version ships upstream (check the changelog before bumping).
 
+// ── Phase 1 enums ──────────────────────────────────────────────────────────
 export type UserRole = "depot_staff" | "dfo" | "checkpost_staff" | "hq_analytics";
 export type ProduceCategory = "timber" | "ntfp_mfp";
 export type MeasurementUnit = "cum" | "quintal" | "kg" | "nos" | "mt";
 export type LedgerTransactionType = "inward" | "outward";
 
+// ── Phase 2 enums ──────────────────────────────────────────────────────────
+export type TransitPassStatus =
+  | "issued"
+  | "in_transit"
+  | "verified"
+  | "completed"
+  | "cancelled";
+
+export type VehicleType = "truck" | "tractor" | "pickup" | "tempo" | "other";
+
+// ── Phase 1 interfaces ─────────────────────────────────────────────────────
 export interface Division {
   id: string;
   name: string;
@@ -89,6 +101,54 @@ export interface StockBalance {
   current_quantity: number;
 }
 
+// ── Phase 2 interfaces ─────────────────────────────────────────────────────
+export interface Vehicle {
+  id: string;
+  registration_no: string;
+  vehicle_type: VehicleType;
+  owner_name: string | null;
+  capacity_value: number | null;
+  capacity_unit: MeasurementUnit | null;
+  is_active: boolean;
+  registered_by: string;
+  created_at: string;
+}
+
+export interface TransitPass {
+  id: string;
+  pass_no: string;
+  depot_id: string;
+  vehicle_id: string | null;
+  driver_name: string | null;
+  driver_license_no: string | null;
+  product_id: string;
+  quantity: number;
+  unit: MeasurementUnit;
+  source_description: string;
+  destination: string;
+  batch_lot_ref: string | null;
+  issued_at: string;
+  valid_until: string | null;
+  status: TransitPassStatus;
+  remarks: string | null;
+  issued_by: string;
+  created_at: string;
+}
+
+export interface CheckpostVerification {
+  id: string;
+  transit_pass_id: string;
+  checkpost_id: string;
+  vehicle_id: string | null;
+  vehicle_reg_observed: string | null;
+  verified_quantity: number | null;
+  quantity_match: boolean | null;
+  discrepancy_notes: string | null;
+  verified_by: string;
+  verified_at: string;
+}
+
+// ── Supabase Database shape ────────────────────────────────────────────────
 export interface Database {
   public: {
     Tables: {
@@ -101,114 +161,116 @@ export interface Database {
       depots: {
         Row: Depot;
         Insert: {
-          id?: string;
-          division_id: string;
-          name: string;
-          code: string;
-          location?: string | null;
-          created_at?: string;
+          id?: string; division_id: string; name: string; code: string;
+          location?: string | null; created_at?: string;
         };
         Update: {
-          id?: string;
-          division_id?: string;
-          name?: string;
-          code?: string;
-          location?: string | null;
-          created_at?: string;
+          id?: string; division_id?: string; name?: string; code?: string;
+          location?: string | null; created_at?: string;
         };
         Relationships: [];
       };
       checkposts: {
         Row: Checkpost;
         Insert: {
-          id?: string;
-          division_id: string;
-          name: string;
-          code: string;
-          location?: string | null;
-          created_at?: string;
+          id?: string; division_id: string; name: string; code: string;
+          location?: string | null; created_at?: string;
         };
         Update: {
-          id?: string;
-          division_id?: string;
-          name?: string;
-          code?: string;
-          location?: string | null;
-          created_at?: string;
+          id?: string; division_id?: string; name?: string; code?: string;
+          location?: string | null; created_at?: string;
         };
         Relationships: [];
       };
       profiles: {
         Row: Profile;
         Insert: {
-          id: string;
-          full_name: string;
-          role: UserRole;
-          depot_id?: string | null;
-          division_id?: string | null;
-          checkpost_id?: string | null;
-          created_at?: string;
+          id: string; full_name: string; role: UserRole;
+          depot_id?: string | null; division_id?: string | null;
+          checkpost_id?: string | null; created_at?: string;
         };
         Update: {
-          id?: string;
-          full_name?: string;
-          role?: UserRole;
-          depot_id?: string | null;
-          division_id?: string | null;
-          checkpost_id?: string | null;
-          created_at?: string;
+          id?: string; full_name?: string; role?: UserRole;
+          depot_id?: string | null; division_id?: string | null;
+          checkpost_id?: string | null; created_at?: string;
         };
         Relationships: [];
       };
       product_master: {
         Row: ProductMaster;
         Insert: {
-          id?: string;
-          code: string;
-          name: string;
-          category: ProduceCategory;
-          species?: string | null;
-          default_unit: MeasurementUnit;
-          description?: string | null;
-          is_active?: boolean;
-          created_at?: string;
+          id?: string; code: string; name: string; category: ProduceCategory;
+          species?: string | null; default_unit: MeasurementUnit;
+          description?: string | null; is_active?: boolean; created_at?: string;
         };
         Update: {
-          id?: string;
-          code?: string;
-          name?: string;
-          category?: ProduceCategory;
-          species?: string | null;
-          default_unit?: MeasurementUnit;
-          description?: string | null;
-          is_active?: boolean;
-          created_at?: string;
+          id?: string; code?: string; name?: string; category?: ProduceCategory;
+          species?: string | null; default_unit?: MeasurementUnit;
+          description?: string | null; is_active?: boolean; created_at?: string;
         };
         Relationships: [];
       };
       stock_ledger: {
         Row: StockLedgerEntry;
         Insert: {
-          id?: string;
-          depot_id: string;
-          product_id: string;
-          transaction_type: LedgerTransactionType;
-          quantity: number;
-          unit: MeasurementUnit;
-          batch_lot_no: string;
-          quality_grade?: string | null;
-          source_or_destination: string;
-          vehicle_reg_no?: string | null;
-          driver_name?: string | null;
-          transit_pass_ref?: string | null;
-          remarks?: string | null;
-          reversal_of?: string | null;
-          recorded_by?: string;
-          recorded_at?: string;
+          id?: string; depot_id: string; product_id: string;
+          transaction_type: LedgerTransactionType; quantity: number;
+          unit: MeasurementUnit; batch_lot_no: string;
+          quality_grade?: string | null; source_or_destination: string;
+          vehicle_reg_no?: string | null; driver_name?: string | null;
+          transit_pass_ref?: string | null; remarks?: string | null;
+          reversal_of?: string | null; recorded_by?: string; recorded_at?: string;
         };
-        // No UPDATE policy exists on this table — see ADR 0002. `never` here
-        // makes a future `.update()` call fail to typecheck before it ever
-        // reaches Postgres (which would also deny it).
+        // No UPDATE policy — see ADR 0002.
+        Update: never;
+        Relationships: [];
+      };
+      // ── Phase 2 tables ───────────────────────────────────────────────────
+      vehicles: {
+        Row: Vehicle;
+        Insert: {
+          id?: string; registration_no: string; vehicle_type?: VehicleType;
+          owner_name?: string | null; capacity_value?: number | null;
+          capacity_unit?: MeasurementUnit | null; is_active?: boolean;
+          registered_by?: string; created_at?: string;
+        };
+        Update: {
+          id?: string; registration_no?: string; vehicle_type?: VehicleType;
+          owner_name?: string | null; capacity_value?: number | null;
+          capacity_unit?: MeasurementUnit | null; is_active?: boolean;
+          registered_by?: string; created_at?: string;
+        };
+        Relationships: [];
+      };
+      transit_passes: {
+        Row: TransitPass;
+        Insert: {
+          id?: string; pass_no: string; depot_id: string;
+          vehicle_id?: string | null; driver_name?: string | null;
+          driver_license_no?: string | null; product_id: string;
+          quantity: number; unit: MeasurementUnit;
+          source_description: string; destination: string;
+          batch_lot_ref?: string | null; issued_at?: string;
+          valid_until?: string | null; status?: TransitPassStatus;
+          remarks?: string | null; issued_by?: string; created_at?: string;
+        };
+        // Only status field is updatable in practice; the full Update type
+        // is defined to allow the status-update mutation.
+        Update: {
+          status?: TransitPassStatus; remarks?: string | null;
+          valid_until?: string | null;
+        };
+        Relationships: [];
+      };
+      checkpost_verifications: {
+        Row: CheckpostVerification;
+        Insert: {
+          id?: string; transit_pass_id: string; checkpost_id: string;
+          vehicle_id?: string | null; vehicle_reg_observed?: string | null;
+          verified_quantity?: number | null; quantity_match?: boolean | null;
+          discrepancy_notes?: string | null; verified_by?: string; verified_at?: string;
+        };
+        // Append-only, like stock_ledger.
         Update: never;
         Relationships: [];
       };
@@ -225,6 +287,8 @@ export interface Database {
       produce_category: ProduceCategory;
       measurement_unit: MeasurementUnit;
       ledger_transaction_type: LedgerTransactionType;
+      transit_pass_status: TransitPassStatus;
+      vehicle_type: VehicleType;
     };
     CompositeTypes: Record<string, never>;
   };
