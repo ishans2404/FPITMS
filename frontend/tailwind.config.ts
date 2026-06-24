@@ -36,6 +36,14 @@ export default {
         "surface-blue-bg": "#afe3ff",
         success: "#37cd84",
         error: "#dd0000",
+        // Mossy Hollow — domain palette for CG Forest Department.
+        // Used for sidebar chrome only; never override semantic surface tokens.
+        forest: {
+          deep:  "#3D4127",   // sidebar bg  (was canvas #0b0b0b)
+          mid:   "#636B2F",   // active nav + dividers
+          sage:  "#BAC095",   // hover tint + soft icon bg
+          pale:  "#D4DE95",   // very light tint, future use
+        },
       },
       fontFamily: {
         sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],

@@ -32,3 +32,6 @@ export const IconShield       = (p: IconProps) => <Ico {...p}><path d="M12 22s8-
 export const IconClock        = (p: IconProps) => <Ico {...p}><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></Ico>;
 export const IconInbox        = (p: IconProps) => <Ico {...p}><polyline points="22,12 16,12 14,15 10,15 8,12 2,12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></Ico>;
 export const IconAlertCircle  = (p: IconProps) => <Ico {...p}><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></Ico>;
+export const IconSearch       = (p: IconProps) => <Ico {...p}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></Ico>;
+export const IconCheckCircle  = (p: IconProps) => <Ico {...p}><circle cx="12" cy="12" r="10"/><polyline points="9,12 11,14 15,10"/></Ico>;
+export const IconCheckpost    = (p: IconProps) => <Ico {...p}><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 10h10"/><path d="M7 14h6"/><circle cx="17" cy="14" r="2"/></Ico>;

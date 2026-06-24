@@ -5,6 +5,7 @@ import { StockLedgerPage } from "@/routes/inventory/StockLedgerPage";
 import { ProductMasterPage } from "@/routes/inventory/ProductMasterPage";
 import { TransitPassListPage } from "@/routes/transit/TransitPassListPage";
 import { VehicleRegistryPage } from "@/routes/transit/VehicleRegistryPage";
+import { CheckpostPage } from "@/routes/transit/CheckpostPage";
 import { AppShell } from "@/components/AppShell";
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
         {/* Phase 2 — Transit */}
         <Route path="/transit/passes"   element={<AppShell><TransitPassListPage /></AppShell>} />
         <Route path="/transit/vehicles" element={<AppShell><VehicleRegistryPage /></AppShell>} />
+        <Route path="/transit/checkpost" element={<AppShell><CheckpostPage /></AppShell>} />
 
         {/* Phase 3 — reports/ intentionally empty */}
         <Route path="*" element={<Navigate to="/" replace />} />

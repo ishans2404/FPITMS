@@ -51,11 +51,11 @@ function Sidebar() {
   const { profile, signOut } = useAuth();
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-20 flex w-60 flex-col bg-canvas">
+    <aside className="fixed inset-y-0 left-0 z-20 flex w-60 flex-col bg-forest-deep">
       {/* Brand */}
-      <div className="flex h-16 shrink-0 items-center gap-sm border-b border-hairline-soft px-lg">
-        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-app-md bg-brand/15">
-          <IconLeaf size={14} className="text-brand" />
+      <div className="flex h-16 shrink-0 items-center gap-sm border-b border-forest-mid/40 px-lg">
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-app-md bg-forest-sage/20">
+          <IconLeaf size={14} className="text-forest-pale" />
         </span>
         <div className="min-w-0">
           <p className="text-[15px] font-semibold leading-tight text-on-primary tracking-tight">
@@ -108,8 +108,8 @@ function Sidebar() {
                     className={({ isActive }) =>
                       `flex items-center gap-sm rounded-app-md px-sm py-[7px] text-button-sm transition-colors ${
                         isActive
-                          ? "bg-canvas-soft text-on-primary"
-                          : "text-ash hover:bg-canvas-soft/70 hover:text-on-primary"
+                          ? "bg-forest-mid text-on-primary"
+                          : "text-ash hover:bg-forest-mid/40 hover:text-on-primary"
                       }`
                     }
                   >
@@ -124,7 +124,7 @@ function Sidebar() {
       </nav>
 
       {/* User footer */}
-      <div className="shrink-0 border-t border-hairline-soft px-lg py-md">
+      <div className="shrink-0 border-t border-forest-mid/40 px-lg py-md">
         <div className="flex items-center justify-between gap-sm">
           <div className="min-w-0">
             <p className="truncate text-caption-tight text-on-primary">

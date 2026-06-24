@@ -27,9 +27,13 @@ export function TableBody({ children }: { children: ReactNode }) {
   return <tbody>{children}</tbody>;
 }
 
-export function TableRow({ children }: { children: ReactNode }) {
+export function TableRow({ children, highlight }: { children: ReactNode; highlight?: boolean }) {
   return (
-    <tr className="border-t border-hairline transition-colors hover:bg-canvas-paper/70">
+    <tr
+      className={`border-t border-hairline transition-colors hover:bg-canvas-paper/70 ${
+        highlight ? "bg-brand/5" : ""
+      }`}
+    >
       {children}
     </tr>
   );
@@ -43,13 +47,43 @@ export function TableHeaderCell({ children }: { children: ReactNode }) {
   );
 }
 
-export function TableCell({ children, mono = false }: { children: ReactNode; mono?: boolean }) {
+export function TableCell({ children, mono = false, className = "" }: { children: ReactNode; mono?: boolean; className?: string }) {
   // mono=true is for system-generated reference IDs (batch/lot no., recorded
   // timestamps) per Section 6 — visually distinct from human-entered text.
   return (
-    <td className={`px-md py-sm align-top ${mono ? "font-mono text-mono-eyebrow text-graphite" : "text-ink"}`}>
+    <td className={`px-md py-sm align-top ${mono ? "font-mono text-mono-eyebrow text-graphite" : "text-ink"} ${className}`}>
       {children}
     </td>
+  );
+}
+
+export function TableSkeleton({ rows = 4, cols = 5 }: { rows?: number; cols?: number }) {
+  return (
+    <Table>
+      <TableHead>
+        <tr>
+          {Array.from({ length: cols }).map((_, i) => (
+            <TableHeaderCell key={i}>
+              <span className="invisible">col</span>
+            </TableHeaderCell>
+          ))}
+        </tr>
+      </TableHead>
+      <TableBody>
+        {Array.from({ length: rows }).map((_, r) => (
+          <TableRow key={r}>
+            {Array.from({ length: cols }).map((_, c) => (
+              <TableCell key={c}>
+                <div
+                  className="h-4 animate-pulse rounded bg-canvas-paper"
+                  style={{ width: `${55 + ((r * 3 + c * 7) % 35)}%` }}
+                />
+              </TableCell>
+            ))}
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   );
 }
 
