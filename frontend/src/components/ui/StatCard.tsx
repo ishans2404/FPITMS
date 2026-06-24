@@ -1,21 +1,65 @@
-// StatCard — a compact stat-display surface for the dashboard strips.
-// Maps to DESIGN.md's feature-card-light pattern but at a reduced height
-// (no xl padding, just md) appropriate for a 4-across metrics row.
-// Per docs/dashboard-design-tokens.md: heading-sm (24px) is the largest
-// size used anywhere in this product — stat values use that ceiling.
+import type { ReactNode } from "react";
+
+type Accent = "default" | "success" | "warning" | "error" | "info";
+
+// Maps semantic accent names → DESIGN.md token classes only.
+// "warning" uses {colors.brand} (coral) — closest token for "needs attention."
+// "info"    uses {colors.link-blue} / {colors.surface-blue-bg}.
+// No invented hex values.
+const accentMap: Record<Accent, { border: string; iconBg: string; iconColor: string }> = {
+  default: { border: "border-l-hairline",       iconBg: "bg-canvas-paper",    iconColor: "text-graphite"  },
+  success: { border: "border-l-success",         iconBg: "bg-success/10",      iconColor: "text-success"   },
+  warning: { border: "border-l-brand",           iconBg: "bg-brand/10",        iconColor: "text-brand"     },
+  error:   { border: "border-l-error",           iconBg: "bg-error/10",        iconColor: "text-error"     },
+  info:    { border: "border-l-link-blue",       iconBg: "bg-surface-blue-bg", iconColor: "text-link-blue" },
+};
 
 interface StatCardProps {
-  label: string;          // mono-caps label above the value
-  value: string | number; // the headline number or string
-  sub?: string;           // optional supporting note below
+  label: string;
+  value: ReactNode;
+  sub?: string;
+  icon?: ReactNode;
+  accent?: Accent;
 }
 
-export function StatCard({ label, value, sub }: StatCardProps) {
+export function StatCard({ label, value, sub, icon, accent = "default" }: StatCardProps) {
+  const { border, iconBg, iconColor } = accentMap[accent];
+
   return (
-    <div className="rounded-app-lg border border-hairline bg-canvas-light px-lg py-md">
-      <p className="font-mono text-mono-caps uppercase tracking-wide text-mute">{label}</p>
-      <p className="mt-xxs text-heading-sm text-ink">{value}</p>
-      {sub && <p className="mt-xxs text-meta text-mute">{sub}</p>}
+    <div
+      className={`
+        relative rounded-marketing border border-hairline bg-canvas-light
+        border-l-[3px] ${border}
+        px-xl py-lg
+      `}
+    >
+      {/* Icon badge — top-right, optional */}
+      {icon && (
+        <div
+          className={`
+            absolute right-lg top-lg
+            flex h-8 w-8 items-center justify-center
+            rounded-app-md ${iconBg} ${iconColor}
+          `}
+        >
+          {icon}
+        </div>
+      )}
+
+      {/* Value — leads visually */}
+      <p className="pr-10 text-heading-sm font-semibold leading-none text-ink">
+        {value}
+      </p>
+
+      {/* Label — mono-caps, below value */}
+      <p className="mt-xs font-mono text-mono-caps uppercase tracking-wider text-mute">
+        {label}
+      </p>
+
+      {/* Sub — tertiary context */}
+      {sub && (
+        <p className="mt-xxs text-meta text-ash">{sub}</p>
+      )}
     </div>
   );
 }

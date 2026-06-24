@@ -1,100 +1,175 @@
 import { type ReactNode } from "react";
 import { NavLink, Navigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
-import { Button } from "@/components/ui/Button";
+import {
+  IconDashboard, IconLedger, IconProduct,
+  IconTransitPass, IconVehicle, IconReports,
+  IconLogOut, IconLeaf,
+} from "@/components/ui/Icons";
 
-// Nav groups — Phase 3 (reports) is registered when that module ships.
-const NAV_GROUPS = [
+// ── Nav config ────────────────────────────────────────────────────────────
+type NavIcon = (props: { size?: number; className?: string }) => JSX.Element;
+
+interface NavItem   { to: string; label: string; icon: NavIcon; end?: boolean; disabled?: boolean }
+interface NavSection { label: string; badge?: string; items: NavItem[] }
+
+const NAV: NavSection[] = [
   {
     label: "Inventory",
     items: [
-      { to: "/",                   label: "Dashboard",      end: true },
-      { to: "/inventory/ledger",   label: "Stock ledger",   end: false },
-      { to: "/inventory/products", label: "Product master", end: false },
+      { to: "/",                   label: "Dashboard",     icon: IconDashboard, end: true },
+      { to: "/inventory/ledger",   label: "Stock ledger",  icon: IconLedger },
+      { to: "/inventory/products", label: "Product master",icon: IconProduct },
     ],
   },
   {
     label: "Transit",
     items: [
-      { to: "/transit/passes",   label: "Transit passes",    end: false },
-      { to: "/transit/vehicles", label: "Vehicle registry",  end: false },
+      { to: "/transit/passes",   label: "Transit passes",    icon: IconTransitPass },
+      { to: "/transit/vehicles", label: "Vehicle registry",  icon: IconVehicle },
+    ],
+  },
+  {
+    label: "Reports",
+    badge: "Phase 3",
+    items: [
+      { to: "/reports", label: "Analytics", icon: IconReports, disabled: true },
     ],
   },
 ];
 
+function roleLabel(r: string | undefined) {
+  const m: Record<string, string> = {
+    depot_staff: "Depot Staff", dfo: "DFO",
+    checkpost_staff: "Checkpost", hq_analytics: "HQ Analytics",
+  };
+  return r ? (m[r] ?? r) : "No role";
+}
+
+// ── Sidebar ───────────────────────────────────────────────────────────────
+function Sidebar() {
+  const { profile, signOut } = useAuth();
+
+  return (
+    <aside className="fixed inset-y-0 left-0 z-20 flex w-60 flex-col bg-canvas">
+      {/* Brand */}
+      <div className="flex h-16 shrink-0 items-center gap-sm border-b border-hairline-soft px-lg">
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-app-md bg-brand/15">
+          <IconLeaf size={14} className="text-brand" />
+        </span>
+        <div className="min-w-0">
+          <p className="text-[15px] font-semibold leading-tight text-on-primary tracking-tight">
+            FPITMS
+          </p>
+          <p className="mt-[2px] font-mono text-mono-micro leading-tight text-mute">
+            CG Forest Dept.
+          </p>
+        </div>
+      </div>
+
+      {/* Nav */}
+      <nav className="flex-1 overflow-y-auto px-xs py-md">
+        {NAV.map((section) => (
+          <div key={section.label} className="mb-md">
+            {/* Section label row */}
+            <div className="mb-[3px] flex items-center gap-xs px-sm py-[2px]">
+              <p className="font-mono text-mono-micro uppercase tracking-widest text-mute">
+                {section.label}
+              </p>
+              {section.badge && (
+                <span className="rounded-app-xs bg-graphite/40 px-[5px] py-[1px] font-mono text-mono-micro text-graphite">
+                  {section.badge}
+                </span>
+              )}
+            </div>
+
+            {/* Items */}
+            <div className="space-y-[1px]">
+              {section.items.map((item) => {
+                const Icon = item.icon;
+
+                if (item.disabled) {
+                  return (
+                    <div
+                      key={item.to}
+                      className="flex cursor-not-allowed items-center gap-sm rounded-app-md px-sm py-[7px] text-button-sm text-graphite"
+                    >
+                      <Icon size={14} />
+                      <span>{item.label}</span>
+                    </div>
+                  );
+                }
+
+                return (
+                  <NavLink
+                    key={item.to}
+                    to={item.to}
+                    end={item.end}
+                    className={({ isActive }) =>
+                      `flex items-center gap-sm rounded-app-md px-sm py-[7px] text-button-sm transition-colors ${
+                        isActive
+                          ? "bg-canvas-soft text-on-primary"
+                          : "text-ash hover:bg-canvas-soft/70 hover:text-on-primary"
+                      }`
+                    }
+                  >
+                    <Icon size={14} />
+                    <span>{item.label}</span>
+                  </NavLink>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </nav>
+
+      {/* User footer */}
+      <div className="shrink-0 border-t border-hairline-soft px-lg py-md">
+        <div className="flex items-center justify-between gap-sm">
+          <div className="min-w-0">
+            <p className="truncate text-caption-tight text-on-primary">
+              {profile?.full_name ?? "—"}
+            </p>
+            <p className="mt-[2px] font-mono text-mono-micro uppercase tracking-wide text-mute">
+              {roleLabel(profile?.role)}
+            </p>
+          </div>
+          <button
+            onClick={signOut}
+            title="Sign out"
+            className="shrink-0 text-ash transition-colors hover:text-error"
+          >
+            <IconLogOut size={14} />
+          </button>
+        </div>
+      </div>
+    </aside>
+  );
+}
+
+// ── Shell ─────────────────────────────────────────────────────────────────
 export function AppShell({ children }: { children: ReactNode }) {
-  const { session, profile, loading, signOut } = useAuth();
+  const { session, loading } = useAuth();
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center text-body-sm text-mute">
-        Loading…
+      <div className="flex min-h-screen items-center justify-center bg-canvas-paper">
+        <div className="flex flex-col items-center gap-md">
+          <span className="h-8 w-8 animate-pulse rounded-full bg-brand/20" />
+          <p className="text-body-sm text-mute">Loading…</p>
+        </div>
       </div>
     );
   }
   if (!session) return <Navigate to="/login" replace />;
 
   return (
-    <div className="min-h-screen bg-canvas-paper">
-      <header className="flex h-16 items-center justify-between border-b border-hairline bg-canvas-light px-lg">
-        {/* Left: wordmark + grouped nav */}
-        <div className="flex items-center gap-xl">
-          {/* Brand mark */}
-          <div className="flex items-center gap-xs">
-            <span className="h-3 w-3 rounded-full bg-brand" aria-hidden />
-            <span className="text-heading-sm text-ink">FPITMS</span>
-          </div>
-
-          {/* Flat nav with group eyebrows on hover — stays in one line */}
-          <nav className="flex items-center gap-xs">
-            {NAV_GROUPS.map((group, gi) => (
-              <span key={group.label} className="flex items-center gap-xs">
-                {/* Subtle separator between groups */}
-                {gi > 0 && (
-                  <span className="mx-xs h-4 w-px bg-hairline" aria-hidden />
-                )}
-
-                {/* Group eyebrow (hidden on small screens, visible on md+) */}
-                <span className="hidden md:inline font-mono text-mono-caps uppercase tracking-wide text-ash select-none">
-                  {group.label}
-                </span>
-
-                {group.items.map((item) => (
-                  <NavLink
-                    key={item.to}
-                    to={item.to}
-                    end={item.end}
-                    className={({ isActive }) =>
-                      `rounded-app-sm px-sm py-xxs text-body-sm transition-colors ${
-                        isActive
-                          ? "bg-canvas-paper text-ink font-medium"
-                          : "text-mute hover:text-ink"
-                      }`
-                    }
-                  >
-                    {item.label}
-                  </NavLink>
-                ))}
-              </span>
-            ))}
-          </nav>
-        </div>
-
-        {/* Right: user identity + sign-out */}
-        <div className="flex items-center gap-md">
-          <span className="text-meta text-mute">
-            {profile?.full_name ?? "—"}{" "}
-            <span className="font-mono text-mono-caps uppercase">
-              · {profile?.role?.replace(/_/g, " ") ?? "no role"}
-            </span>
-          </span>
-          <Button variant="ghost" onClick={signOut}>
-            Sign out
-          </Button>
-        </div>
-      </header>
-
-      <main className="mx-auto max-w-5xl px-lg py-xl">{children}</main>
+    <div className="flex min-h-screen bg-canvas-paper">
+      <Sidebar />
+      {/* Offset by sidebar width on all viewports — ops tool, desktop-first */}
+      <div className="ml-60 flex flex-1 flex-col">
+        <main className="flex-1 px-xl py-lg">{children}</main>
+      </div>
     </div>
   );
 }
