@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import {
   IconDashboard, IconLedger, IconProduct,
   IconTransitPass, IconVehicle, IconReports,
-  IconLogOut, IconLeaf,
+  IconLogOut, IconLeaf, IconCheckpost,
 } from "@/components/ui/Icons";
 
 // ── Nav config ────────────────────────────────────────────────────────────
@@ -25,15 +25,19 @@ const NAV: NavSection[] = [
   {
     label: "Transit",
     items: [
-      { to: "/transit/passes",   label: "Transit passes",    icon: IconTransitPass },
-      { to: "/transit/vehicles", label: "Vehicle registry",  icon: IconVehicle },
+      { to: "/transit/passes",    label: "Transit passes",   icon: IconTransitPass },
+      { to: "/transit/vehicles",  label: "Vehicle registry", icon: IconVehicle },
+      { to: "/transit/checkpost", label: "Checkpost",        icon: IconCheckpost },
     ],
   },
   {
     label: "Reports",
-    badge: "Phase 3",
     items: [
-      { to: "/reports", label: "Analytics", icon: IconReports, disabled: true },
+      { to: "/reports",                  label: "Overview",         icon: IconReports,    end: true },
+      { to: "/reports/stock-register",   label: "Stock register",   icon: IconLedger },
+      { to: "/reports/transit",          label: "Transit passes",   icon: IconTransitPass },
+      { to: "/reports/vehicle-movement", label: "Vehicle movement", icon: IconVehicle },
+      { to: "/reports/analytics",        label: "Analytics",        icon: IconDashboard },
     ],
   },
 ];

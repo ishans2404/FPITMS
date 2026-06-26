@@ -148,7 +148,100 @@ export interface CheckpostVerification {
   verified_at: string;
 }
 
+// ── Phase 3 view row types ─────────────────────────────────────────────────
+export interface StockRegisterRow {
+  id: string;
+  depot_id: string;
+  product_id: string;
+  recorded_at: string;
+  transaction_type: LedgerTransactionType;
+  quantity: number;
+  unit: MeasurementUnit;
+  batch_lot_no: string;
+  quality_grade: string | null;
+  source_or_destination: string;
+  transit_pass_ref: string | null;
+  vehicle_reg_no: string | null;
+  driver_name: string | null;
+  remarks: string | null;
+  reversal_of: string | null;
+  product_name: string;
+  product_code: string;
+  product_category: ProduceCategory;
+  depot_name: string;
+  depot_code: string;
+  division_name: string;
+  division_code: string;
+  recorded_by_name: string | null;
+}
+
+export interface TransitPassReportRow {
+  id: string;
+  depot_id: string;
+  product_id: string;
+  pass_no: string;
+  issued_at: string;
+  valid_until: string | null;
+  status: TransitPassStatus;
+  quantity: number;
+  unit: MeasurementUnit;
+  source_description: string;
+  destination: string;
+  driver_name: string | null;
+  driver_license_no: string | null;
+  batch_lot_ref: string | null;
+  remarks: string | null;
+  product_name: string;
+  product_code: string;
+  product_category: ProduceCategory;
+  vehicle_reg_no: string | null;
+  vehicle_type: VehicleType | null;
+  depot_name: string;
+  depot_code: string;
+  division_name: string;
+  division_code: string;
+  issued_by_name: string | null;
+}
+
+export interface CheckpostVerificationReportRow {
+  id: string;
+  transit_pass_id: string;
+  checkpost_id: string;
+  verified_at: string;
+  vehicle_reg_observed: string | null;
+  verified_quantity: number | null;
+  quantity_match: boolean | null;
+  discrepancy_notes: string | null;
+  pass_no: string;
+  pass_quantity: number;
+  unit: MeasurementUnit;
+  destination: string;
+  pass_status: TransitPassStatus;
+  product_name: string;
+  product_code: string;
+  checkpost_name: string;
+  checkpost_code: string;
+  depot_name: string;
+  depot_code: string;
+  division_name: string;
+  vehicle_reg_no: string | null;
+  verified_by_name: string | null;
+}
+
+export interface DailySummaryRow {
+  day: string;
+  depot_id: string;
+  depot_name: string;
+  depot_code: string;
+  division_id: string;
+  division_name: string;
+  transaction_type: LedgerTransactionType;
+  entry_count: number;
+  total_quantity: number;
+}
+
 // ── Supabase Database shape ────────────────────────────────────────────────
+
 export interface Database {
   public: {
     Tables: {
@@ -278,6 +371,22 @@ export interface Database {
     Views: {
       stock_balance: {
         Row: StockBalance;
+        Relationships: [];
+      };
+      v_stock_register: {
+        Row: StockRegisterRow;
+        Relationships: [];
+      };
+      v_transit_pass_report: {
+        Row: TransitPassReportRow;
+        Relationships: [];
+      };
+      v_checkpost_verification_report: {
+        Row: CheckpostVerificationReportRow;
+        Relationships: [];
+      };
+      v_daily_summary: {
+        Row: DailySummaryRow;
         Relationships: [];
       };
     };

@@ -6,6 +6,11 @@ import { ProductMasterPage } from "@/routes/inventory/ProductMasterPage";
 import { TransitPassListPage } from "@/routes/transit/TransitPassListPage";
 import { VehicleRegistryPage } from "@/routes/transit/VehicleRegistryPage";
 import { CheckpostPage } from "@/routes/transit/CheckpostPage";
+import { ReportsPage } from "@/routes/reports/ReportsPage";
+import { StockRegisterPage } from "@/routes/reports/StockRegisterPage";
+import { TransitReportPage } from "@/routes/reports/TransitReportPage";
+import { VehicleMovementPage } from "@/routes/reports/VehicleMovementPage";
+import { AnalyticsDashboardPage } from "@/routes/reports/AnalyticsDashboardPage";
 import { AppShell } from "@/components/AppShell";
 
 export default function App() {
@@ -24,7 +29,13 @@ export default function App() {
         <Route path="/transit/vehicles" element={<AppShell><VehicleRegistryPage /></AppShell>} />
         <Route path="/transit/checkpost" element={<AppShell><CheckpostPage /></AppShell>} />
 
-        {/* Phase 3 — reports/ intentionally empty */}
+        {/* Phase 3 — Reports */}
+        <Route path="/reports"                   element={<AppShell><ReportsPage /></AppShell>} />
+        <Route path="/reports/stock-register"    element={<AppShell><StockRegisterPage /></AppShell>} />
+        <Route path="/reports/transit"           element={<AppShell><TransitReportPage /></AppShell>} />
+        <Route path="/reports/vehicle-movement"  element={<AppShell><VehicleMovementPage /></AppShell>} />
+        <Route path="/reports/analytics"         element={<AppShell><AnalyticsDashboardPage /></AppShell>} />
+
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
