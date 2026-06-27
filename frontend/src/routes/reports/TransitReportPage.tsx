@@ -59,7 +59,7 @@ export function TransitReportPage() {
     <div className="flex flex-col gap-lg">
       {/* Header */}
       <div>
-        <p className="font-mono text-mono-eyebrow uppercase tracking-wide text-mute">
+        <p className="font-mono text-mono-eyebrow uppercase tracking-wide text-forest-mid">
           Reports · CG Transit (Forest Produce) Rules, 2001
         </p>
         <h1 className="text-heading-md text-ink">Transit pass report</h1>

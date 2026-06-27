@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabaseClient";
-import type { ProductMasterInput } from "@/lib/validators/productMaster";
+import type { ProductMasterInput, ProductMasterUpdateInput } from "@/lib/validators/productMaster";
 
 export function useProducts() {
   return useQuery({
@@ -30,6 +30,44 @@ export function useCreateProduct() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["product_master"] });
+    },
+  });
+}
+
+export function useUpdateProduct() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ id, input }: { id: string; input: ProductMasterUpdateInput }) => {
+      const { data, error } = await supabase
+        .from("product_master")
+        .update(input)
+        .eq("id", id)
+        .select()
+        .single();
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["product_master"] });
+    },
+  });
+}
+
+// Soft-delete only — products are referenced by stock_ledger history.
+// Sets is_active = false; row stays in DB and all ledger entries remain valid.
+export function useDeactivateProduct() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase
+        .from("product_master")
+        .update({ is_active: false })
+        .eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["product_master"] });
+      queryClient.invalidateQueries({ queryKey: ["stock_balance"] });
     },
   });
 }

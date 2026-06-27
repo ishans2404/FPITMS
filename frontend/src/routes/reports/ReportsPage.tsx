@@ -52,7 +52,7 @@ export function ReportsPage() {
     <div className="flex flex-col gap-lg">
       {/* Page header */}
       <div>
-        <p className="font-mono text-mono-eyebrow uppercase tracking-wide text-mute">
+        <p className="font-mono text-mono-eyebrow uppercase tracking-wide text-forest-mid">
           Phase 3 · Reporting
         </p>
         <h1 className="text-heading-md text-ink">Reports</h1>

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-type Variant = "neutral" | "filled" | "success" | "error" | "brand" | "info";
+type Variant = "neutral" | "filled" | "success" | "error" | "brand" | "info" | "forest";
 
 const variantClasses: Record<Variant, string> = {
   // DESIGN.md badge-neutral / badge-filled, reused as-is.
@@ -11,6 +11,7 @@ const variantClasses: Record<Variant, string> = {
   brand: "bg-brand/10 text-brand-deep border border-brand/30",
   // info: used for "in_transit" / informational states — {colors.link-blue} + {colors.surface-blue-bg}
   info: "bg-surface-blue-bg text-link-blue border border-link-blue/20",
+  forest: "bg-forest-sage/25 text-forest-deep border border-forest-mid/30",
 };
 
 export function Badge({ variant = "neutral", children }: { variant?: Variant; children: ReactNode }) {

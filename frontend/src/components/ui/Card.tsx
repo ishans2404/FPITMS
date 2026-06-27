@@ -17,5 +17,5 @@ export function CardTitle({ children }: { children: ReactNode }) {
 
 export function CardEyebrow({ children }: { children: ReactNode }) {
   // IBM Plex Mono, reserved for technical/system labels only (Section 6).
-  return <p className="font-mono text-mono-eyebrow uppercase tracking-wide text-mute">{children}</p>;
+  return <p className="font-mono text-mono-eyebrow uppercase tracking-wide text-forest-mid">{children}</p>;
 }

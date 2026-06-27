@@ -7,7 +7,7 @@ export function ProductMasterPage() {
   return (
     <div className="flex flex-col gap-lg">
       <div>
-        <p className="font-mono text-mono-eyebrow uppercase tracking-wide text-mute">
+        <p className="font-mono text-mono-eyebrow uppercase tracking-wide text-forest-mid">
           Reference data
         </p>
         <div className="flex items-baseline gap-md">

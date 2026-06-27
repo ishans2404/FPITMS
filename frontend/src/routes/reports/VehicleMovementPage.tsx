@@ -43,7 +43,7 @@ export function VehicleMovementPage() {
     <div className="flex flex-col gap-lg">
       {/* Header */}
       <div>
-        <p className="font-mono text-mono-eyebrow uppercase tracking-wide text-mute">
+        <p className="font-mono text-mono-eyebrow uppercase tracking-wide text-forest-mid">
           Reports · Checkpost
         </p>
         <h1 className="text-heading-md text-ink">Vehicle movement report</h1>

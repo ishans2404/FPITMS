@@ -58,14 +58,14 @@ function Sidebar() {
     <aside className="fixed inset-y-0 left-0 z-20 flex w-60 flex-col bg-forest-deep">
       {/* Brand */}
       <div className="flex h-16 shrink-0 items-center gap-sm border-b border-forest-mid/40 px-lg">
-        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-app-md bg-forest-sage/20">
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-app-md bg-forest-sage/30">
           <IconLeaf size={14} className="text-forest-pale" />
         </span>
         <div className="min-w-0">
           <p className="text-[15px] font-semibold leading-tight text-on-primary tracking-tight">
             FPITMS
           </p>
-          <p className="mt-[2px] font-mono text-mono-micro leading-tight text-mute">
+          <p className="mt-[2px] font-mono text-mono-micro leading-tight text-forest-sage">
             CG Forest Dept.
           </p>
         </div>
@@ -77,11 +77,11 @@ function Sidebar() {
           <div key={section.label} className="mb-md">
             {/* Section label row */}
             <div className="mb-[3px] flex items-center gap-xs px-sm py-[2px]">
-              <p className="font-mono text-mono-micro uppercase tracking-widest text-mute">
+              <p className="font-mono text-mono-micro uppercase tracking-widest text-forest-sage">
                 {section.label}
               </p>
               {section.badge && (
-                <span className="rounded-app-xs bg-graphite/40 px-[5px] py-[1px] font-mono text-mono-micro text-graphite">
+                <span className="rounded-app-xs bg-forest-mid/40 px-[5px] py-[1px] font-mono text-mono-micro text-forest-sage">
                   {section.badge}
                 </span>
               )}
@@ -112,7 +112,7 @@ function Sidebar() {
                     className={({ isActive }) =>
                       `flex items-center gap-sm rounded-app-md px-sm py-[7px] text-button-sm transition-colors ${
                         isActive
-                          ? "bg-forest-mid text-on-primary"
+                          ? "bg-forest-mid text-on-primary shadow-[inset_2px_0_0_#D4DE95]"
                           : "text-ash hover:bg-forest-mid/40 hover:text-on-primary"
                       }`
                     }
@@ -134,7 +134,7 @@ function Sidebar() {
             <p className="truncate text-caption-tight text-on-primary">
               {profile?.full_name ?? "—"}
             </p>
-            <p className="mt-[2px] font-mono text-mono-micro uppercase tracking-wide text-mute">
+            <p className="mt-[2px] font-mono text-mono-micro uppercase tracking-wide text-forest-sage">
               {roleLabel(profile?.role)}
             </p>
           </div>
@@ -168,7 +168,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   if (!session) return <Navigate to="/login" replace />;
 
   return (
-    <div className="flex min-h-screen bg-canvas-paper">
+    <div className="flex min-h-screen bg-forest-pale/15">
       <Sidebar />
       {/* Offset by sidebar width on all viewports — ops tool, desktop-first */}
       <div className="ml-60 flex flex-1 flex-col">

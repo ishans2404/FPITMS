@@ -21,7 +21,7 @@ export function VehicleRegistryPage() {
       {/* Header */}
       <div className="flex items-start justify-between">
         <div>
-          <p className="font-mono text-mono-eyebrow uppercase tracking-wide text-mute">
+          <p className="font-mono text-mono-eyebrow uppercase tracking-wide text-forest-mid">
             Transit module
           </p>
           <h1 className="text-heading-md text-ink">Vehicle registry</h1>

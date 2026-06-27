@@ -45,7 +45,7 @@ export function StockRegisterPage() {
     <div className="flex flex-col gap-lg">
       {/* Header */}
       <div>
-        <p className="font-mono text-mono-eyebrow uppercase tracking-wide text-mute">
+        <p className="font-mono text-mono-eyebrow uppercase tracking-wide text-forest-mid">
           Reports · Inventory
         </p>
         <h1 className="text-heading-md text-ink">Stock register</h1>

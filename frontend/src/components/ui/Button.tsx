@@ -11,7 +11,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 // button-primary doesn't fit here.
 const variantClasses: Record<Variant, string> = {
   "app-primary":
-    "bg-ink text-on-primary hover:bg-ink-soft h-[38px] rounded-app-md font-medium",
+    "bg-forest-deep text-on-primary hover:bg-forest-mid h-[38px] rounded-app-md font-medium",
   // Reserved for the single highest-priority/critical action on a screen
   // (Section 6 CTA-scarcity rule) — unused by any Phase 1 screen so far.
   brand: "bg-brand text-ink hover:opacity-90 h-[38px] rounded-app-md font-medium",

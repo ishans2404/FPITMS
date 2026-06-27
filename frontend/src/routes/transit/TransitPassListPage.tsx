@@ -34,7 +34,7 @@ export function TransitPassListPage() {
       {/* Header */}
       <div className="flex items-start justify-between">
         <div>
-          <p className="font-mono text-mono-eyebrow uppercase tracking-wide text-mute">
+          <p className="font-mono text-mono-eyebrow uppercase tracking-wide text-forest-mid">
             CG Transit (Forest Produce) Rules, 2001
           </p>
           <h1 className="text-heading-md text-ink">Transit passes</h1>
@@ -77,7 +77,7 @@ export function TransitPassListPage() {
             onClick={() => setStatusFilter(s)}
             className={`rounded-full px-sm py-xxs text-caption transition-colors ${
               statusFilter === s
-                ? "bg-ink text-on-primary"
+                ? "bg-forest-deep text-on-primary"
                 : "bg-canvas-paper text-mute hover:text-ink"
             }`}
           >

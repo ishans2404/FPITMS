@@ -17,7 +17,7 @@ export function StockLedgerPage() {
     <div className="flex flex-col gap-lg">
       <div className="flex items-center justify-between">
         <div>
-          <p className="font-mono text-mono-eyebrow uppercase tracking-wide text-mute">
+          <p className="font-mono text-mono-eyebrow uppercase tracking-wide text-forest-mid">
             Inward / outward
           </p>
           <h1 className="text-heading-md text-ink">Stock ledger</h1>

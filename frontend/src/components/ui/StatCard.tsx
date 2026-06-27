@@ -7,7 +7,7 @@ type Accent = "default" | "success" | "warning" | "error" | "info";
 // "info"    uses {colors.link-blue} / {colors.surface-blue-bg}.
 // No invented hex values.
 const accentMap: Record<Accent, { border: string; iconBg: string; iconColor: string }> = {
-  default: { border: "border-l-hairline",       iconBg: "bg-canvas-paper",    iconColor: "text-graphite"  },
+  default: { border: "border-l-forest-sage",     iconBg: "bg-forest-sage/15",  iconColor: "text-forest-mid" },
   success: { border: "border-l-success",         iconBg: "bg-success/10",      iconColor: "text-success"   },
   warning: { border: "border-l-brand",           iconBg: "bg-brand/10",        iconColor: "text-brand"     },
   error:   { border: "border-l-error",           iconBg: "bg-error/10",        iconColor: "text-error"     },

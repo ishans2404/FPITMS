@@ -17,7 +17,7 @@ export function Table({ children }: { children: ReactNode }) {
 
 export function TableHead({ children }: { children: ReactNode }) {
   return (
-    <thead className="border-b border-hairline bg-canvas-paper text-caption-tight text-graphite">
+    <thead className="border-b border-forest-sage/25 bg-forest-pale/25 text-caption-tight text-graphite">
       {children}
     </thead>
   );
@@ -30,7 +30,7 @@ export function TableBody({ children }: { children: ReactNode }) {
 export function TableRow({ children, highlight }: { children: ReactNode; highlight?: boolean }) {
   return (
     <tr
-      className={`border-t border-hairline transition-colors hover:bg-canvas-paper/70 ${
+      className={`border-t border-hairline transition-colors hover:bg-forest-pale/20 ${
         highlight ? "bg-brand/5" : ""
       }`}
     >

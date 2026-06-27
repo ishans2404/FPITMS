@@ -70,7 +70,7 @@ export function StockBalanceTable({ depotId }: Props) {
             <TableCell mono>{row.code}</TableCell>
             <TableCell>{row.name}</TableCell>
             <TableCell>
-              <Badge variant={row.category === "timber" ? "filled" : "neutral"}>
+              <Badge variant={row.category === "timber" ? "forest" : "neutral"}>
                 {row.category === "timber" ? "Timber" : "NTFP / MFP"}
               </Badge>
             </TableCell>

@@ -12,11 +12,11 @@ export function DepotInfoBanner({ depotId }: { depotId: string }) {
   if (!depot) return null;
 
   return (
-    <div className="rounded-app-lg border border-hairline bg-canvas-light px-lg py-md">
+    <div className="rounded-app-lg border border-forest-sage/30 bg-forest-pale/20 border-l-[3px] border-l-forest-mid px-lg py-md">
       <div className="flex flex-wrap items-center gap-xl">
         {/* Depot name */}
         <div>
-          <p className="font-mono text-mono-caps uppercase tracking-wide text-mute">Depot</p>
+          <p className="font-mono text-mono-caps uppercase tracking-wide text-forest-mid">Depot</p>
           <p className="mt-xxs text-subtitle text-ink">{depot.name}</p>
         </div>
 
@@ -24,7 +24,7 @@ export function DepotInfoBanner({ depotId }: { depotId: string }) {
 
         {/* Depot code (mono — reference ID convention) */}
         <div>
-          <p className="font-mono text-mono-caps uppercase tracking-wide text-mute">Code</p>
+          <p className="font-mono text-mono-caps uppercase tracking-wide text-forest-mid">Code</p>
           <p className="mt-xxs font-mono text-mono-eyebrow text-graphite">{depot.code}</p>
         </div>
 
@@ -32,7 +32,7 @@ export function DepotInfoBanner({ depotId }: { depotId: string }) {
           <>
             <div className="hidden h-8 w-px bg-hairline sm:block" />
             <div>
-              <p className="font-mono text-mono-caps uppercase tracking-wide text-mute">Division</p>
+              <p className="font-mono text-mono-caps uppercase tracking-wide text-forest-mid">Division</p>
               <p className="mt-xxs text-body-sm text-ink">{division.name}</p>
             </div>
           </>
@@ -42,7 +42,7 @@ export function DepotInfoBanner({ depotId }: { depotId: string }) {
           <>
             <div className="hidden h-8 w-px bg-hairline sm:block" />
             <div>
-              <p className="font-mono text-mono-caps uppercase tracking-wide text-mute">Location</p>
+              <p className="font-mono text-mono-caps uppercase tracking-wide text-forest-mid">Location</p>
               <p className="mt-xxs text-body-sm text-ink">{depot.location}</p>
             </div>
           </>
