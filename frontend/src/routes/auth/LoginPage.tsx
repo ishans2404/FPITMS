@@ -24,8 +24,8 @@ export function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-canvas-paper px-md">
-      <div className="w-full max-w-sm rounded-marketing border border-hairline bg-canvas-light p-xl">
+    <div className="flex min-h-screen items-center justify-center bg-canvas-paper px-md py-xl">
+      <div className="w-full max-w-sm rounded-marketing border border-hairline bg-canvas-light p-lg sm:p-xl">
         <p className="font-mono text-mono-caps uppercase tracking-wide text-mute">
           Chhattisgarh Forest Department
         </p>

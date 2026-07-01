@@ -1,3 +1,6 @@
+seed_users.ts
+*.patch
+
 # Logs
 logs
 *.log

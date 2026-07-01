@@ -110,7 +110,7 @@ function VerificationForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-md">
-      <div className="grid grid-cols-2 gap-md">
+      <div className="grid grid-cols-1 gap-md sm:grid-cols-2">
         <div className="flex flex-col gap-xxs">
           <label className="text-caption-tight text-graphite">Vehicle reg. observed at gate</label>
           <input
@@ -235,7 +235,7 @@ export function CheckpostPage() {
       </div>
 
       {/* Stat strip */}
-      <div className="grid grid-cols-3 gap-md">
+      <div className="grid grid-cols-1 gap-md sm:grid-cols-3">
         <StatCard
           label="Total verified"
           value={totalCount}
@@ -303,7 +303,7 @@ export function CheckpostPage() {
                 {statusBadge(foundPass.status as PassStatus)}
               </div>
 
-              <div className="grid grid-cols-2 gap-sm text-body-sm mb-md">
+              <div className="grid grid-cols-1 gap-sm text-body-sm mb-md sm:grid-cols-2">
                 <div>
                   <span className="font-mono text-mono-caps text-mute">Vehicle</span>
                   <p className="font-mono text-mono-eyebrow text-ink mt-xxs">

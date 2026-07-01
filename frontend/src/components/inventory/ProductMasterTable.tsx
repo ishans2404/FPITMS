@@ -69,7 +69,7 @@ function AddForm({ onDone }: { onDone: () => void }) {
     >
       <h3 className="text-heading-sm text-ink">Add product</h3>
 
-      <div className="grid grid-cols-2 gap-md">
+      <div className="grid grid-cols-1 gap-md sm:grid-cols-2">
         <Input
           label="Code"
           placeholder="e.g. TBR-SAL"
@@ -84,7 +84,7 @@ function AddForm({ onDone }: { onDone: () => void }) {
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-md">
+      <div className="grid grid-cols-1 gap-md sm:grid-cols-2">
         <Select label="Category" error={errors.category?.message} {...register("category")}>
           <option value="timber">Timber</option>
           <option value="ntfp_mfp">NTFP / MFP</option>
@@ -96,7 +96,7 @@ function AddForm({ onDone }: { onDone: () => void }) {
         </Select>
       </div>
 
-      <div className="grid grid-cols-2 gap-md">
+      <div className="grid grid-cols-1 gap-md sm:grid-cols-2">
         <Input
           label="Species (optional)"
           placeholder="e.g. Shorea robusta"
@@ -166,7 +166,7 @@ function EditForm({
         <span className="font-mono text-mono-eyebrow text-graphite">{product.code}</span>
       </div>
 
-      <div className="grid grid-cols-2 gap-md">
+      <div className="grid grid-cols-1 gap-md sm:grid-cols-2">
         <Input
           label="Name"
           error={errors.name?.message}
@@ -178,7 +178,7 @@ function EditForm({
         </Select>
       </div>
 
-      <div className="grid grid-cols-2 gap-md">
+      <div className="grid grid-cols-1 gap-md sm:grid-cols-2">
         <Select label="Default unit" error={errors.default_unit?.message} {...register("default_unit")}>
           {UNITS.map((u) => (
             <option key={u} value={u}>{u}</option>

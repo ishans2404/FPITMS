@@ -63,7 +63,7 @@ export function VehicleMovementPage() {
       </div>
 
       {/* Summary strip */}
-      <div className="grid grid-cols-3 gap-md">
+      <div className="grid grid-cols-1 gap-md sm:grid-cols-3">
         <StatCard label="Total verifications" value={total} sub="In date range" accent="info" />
         <StatCard label="Quantity matched" value={matches} sub="Verified clean" accent="success" />
         <StatCard

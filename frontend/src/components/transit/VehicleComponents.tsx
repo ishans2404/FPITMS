@@ -49,7 +49,7 @@ export function VehicleForm({ onDone }: { onDone?: () => void }) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-md">
-      <div className="grid grid-cols-2 gap-md">
+      <div className="grid grid-cols-1 gap-md sm:grid-cols-2">
         <Input
           label="Registration number"
           placeholder="e.g. CG04AB1234"
@@ -69,7 +69,7 @@ export function VehicleForm({ onDone }: { onDone?: () => void }) {
 
       <Input label="Owner name (optional)" {...register("owner_name")} />
 
-      <div className="grid grid-cols-2 gap-md">
+      <div className="grid grid-cols-1 gap-md sm:grid-cols-2">
         <Input
           label="Capacity (optional)"
           type="number"

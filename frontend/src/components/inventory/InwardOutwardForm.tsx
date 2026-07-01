@@ -59,7 +59,7 @@ export function InwardOutwardForm({ onDone }: { onDone?: () => void }) {
         ))}
       </Select>
 
-      <div className="grid grid-cols-2 gap-md">
+      <div className="grid grid-cols-1 gap-md sm:grid-cols-2">
         <Input
           label="Quantity"
           type="number"

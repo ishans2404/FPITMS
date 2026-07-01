@@ -32,7 +32,7 @@ export function TransitPassListPage() {
   return (
     <div className="flex flex-col gap-lg">
       {/* Header */}
-      <div className="flex items-start justify-between">
+      <div className="flex flex-wrap items-start justify-between gap-sm">
         <div>
           <p className="font-mono text-mono-eyebrow uppercase tracking-wide text-forest-mid">
             CG Transit (Forest Produce) Rules, 2001

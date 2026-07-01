@@ -15,7 +15,7 @@ export function StockLedgerPage() {
 
   return (
     <div className="flex flex-col gap-lg">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-sm">
         <div>
           <p className="font-mono text-mono-eyebrow uppercase tracking-wide text-forest-mid">
             Inward / outward

@@ -19,7 +19,7 @@ export function DepotDashboardPage() {
   return (
     <div className="flex flex-col gap-lg">
       {/* Page header */}
-      <div className="flex items-start justify-between">
+      <div className="flex flex-wrap items-start justify-between gap-sm">
         <div>
           <p className="font-mono text-mono-eyebrow uppercase tracking-wide text-forest-mid">
             {profile?.role === "dfo" ? "Division overview" : "Depot overview"}

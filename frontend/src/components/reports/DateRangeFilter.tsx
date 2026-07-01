@@ -8,14 +8,14 @@ interface Props {
 
 export function DateRangeFilter({ value, onChange }: Props) {
   return (
-    <div className="flex items-end gap-sm">
+    <div className="flex flex-wrap items-end gap-sm">
       <Input
         label="From"
         type="date"
         value={value.from}
         onChange={(e) => onChange({ ...value, from: e.target.value })}
       />
-      <span className="mb-[10px] text-body-sm text-mute">—</span>
+      <span className="mb-[10px] hidden text-body-sm text-mute sm:block">—</span>
       <Input
         label="To"
         type="date"

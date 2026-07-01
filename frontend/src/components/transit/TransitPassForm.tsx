@@ -50,7 +50,7 @@ export function TransitPassForm({ onDone }: { onDone?: () => void }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-md">
       {/* Pass number + validity */}
-      <div className="grid grid-cols-2 gap-md">
+      <div className="grid grid-cols-1 gap-md sm:grid-cols-2">
         <Input
           label="Transit pass number"
           placeholder="e.g. CG-RPR-2026-0001"
@@ -65,8 +65,8 @@ export function TransitPassForm({ onDone }: { onDone?: () => void }) {
       </div>
 
       {/* Product + qty */}
-      <div className="grid grid-cols-3 gap-md">
-        <div className="col-span-2">
+      <div className="grid grid-cols-1 gap-md sm:grid-cols-3">
+        <div className="sm:col-span-2">
           <Select
             label="Product"
             error={errors.product_id?.message}
@@ -89,7 +89,7 @@ export function TransitPassForm({ onDone }: { onDone?: () => void }) {
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-md">
+      <div className="grid grid-cols-1 gap-md sm:grid-cols-2">
         <Select label="Unit" error={errors.unit?.message} {...register("unit")}>
           {UNITS.map((u) => (
             <option key={u} value={u}>{u}</option>
@@ -103,7 +103,7 @@ export function TransitPassForm({ onDone }: { onDone?: () => void }) {
       </div>
 
       {/* Vehicle + driver */}
-      <div className="grid grid-cols-2 gap-md">
+      <div className="grid grid-cols-1 gap-md sm:grid-cols-2">
         <Select label="Vehicle (optional)" {...register("vehicle_id")}>
           <option value="">Select a vehicle</option>
           {vehicles?.map((v) => (
@@ -120,7 +120,7 @@ export function TransitPassForm({ onDone }: { onDone?: () => void }) {
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-md">
+      <div className="grid grid-cols-1 gap-md sm:grid-cols-2">
         <Input
           label="Driver licence no. (optional)"
           {...register("driver_license_no")}
